@@ -2,5 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-// Import Bootstrap
+
 import "bootstrap"
+import "font-awesome"
