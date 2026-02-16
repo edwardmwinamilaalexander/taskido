@@ -4,4 +4,4 @@ import "controllers"
 
 
 import "bootstrap"
-import "font-awesome"
+import "font-awesome"import * as bootstrap from "bootstrap"

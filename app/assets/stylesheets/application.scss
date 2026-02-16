@@ -1,5 +1,11 @@
-// Bootstrap SCSS import
-@import "bootstrap";
+// Bootstrap Core
+@use "bootstrap/scss/bootstrap" as *;
 
-// Your custom styles below
-// @import "custom";
+// Bootstrap Icons
+@use "bootstrap-icons/font/bootstrap-icons" as *;
+
+// Devise styles
+@use "devise" as *;
+
+// Your custom overrides
+@use "custom" as *;

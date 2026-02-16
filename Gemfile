@@ -69,6 +69,7 @@ end
 
 
 gem 'bootstrap', '~> 5.3.0'
+gem "cssbundling-rails"
 gem 'jquery-rails'  # Bootstrap's JavaScript depends on jQuery
 gem 'dartsass-rails', '~> 0.5.0'
 
