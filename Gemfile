@@ -64,5 +64,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 
-  gem 'twitter-bootstrap-rails', '~> 5.1'
+ 
 end
+
+
+gem 'bootstrap', '~> 5.3.0'
+gem 'jquery-rails'  # Bootstrap's JavaScript depends on jQuery
+gem 'dartsass-rails', '~> 0.5.0'

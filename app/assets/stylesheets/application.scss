@@ -1,0 +1,13 @@
+/*
+ * This is a manifest file that'll be compiled into application.css
+ * 
+ * Bootstrap import must come before any custom styles
+ *= require_tree .
+ *= require_self
+ */
+
+// Bootstrap SCSS import
+@import "bootstrap";
+
+// Your custom styles below
+// @import "custom";
