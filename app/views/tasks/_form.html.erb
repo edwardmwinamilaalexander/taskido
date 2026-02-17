@@ -1,0 +1,12 @@
+<% if @task.errors.any? %>
+  <ul>
+    <% @task.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= simple_form_for @task do |f| %>
+  <%= f.input :content %>
+  <%= f.button :submit, "Update Task", class: "btn btn-primary" %>
+<% end %>
+<p><%= link_to 'Go back to all tasks', tasks_path %></p>
