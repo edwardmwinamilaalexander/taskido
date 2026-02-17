@@ -1,12 +1,20 @@
 <% if @task.errors.any? %>
-  <ul>
-    <% @task.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+  <div class="alert alert-danger">
+    <h4><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h4>
+    <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 <%= simple_form_for @task do |f| %>
   <%= f.input :content %>
-  <%= f.button :submit, "Update Task", class: "btn btn-primary" %>
+  <%= f.input :state, 
+              collection: ["to_do", "doing", "done"], 
+              prompt: "Select State",
+              include_blank: false %>
+  <%# Dynamic button text based on whether it's a new or existing record %>
+  <%= f.button :submit, @task.new_record? ? "Create Task" : "Update Task", class: "btn btn-primary" %>
 <% end %>
 <p><%= link_to 'Go back to all tasks', tasks_path %></p>

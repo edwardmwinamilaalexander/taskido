@@ -1,13 +1,57 @@
-<h1>All Tasks</h1>
-<p><%= link_to 'New Task', new_task_path %></p>
+<h1>To do</h1>
 <table>
   <tr>
     <th>Content</th>
-    <th>Actions</th>
+    <th>State</th>
   </tr>
-  <% @tasks.each do |task| %>
+  <% @to_do.each do |task| %>
     <tr>
       <td><%= link_to task.content, task %></td>
+      <td><%= link_to task.state, task %></td>
+      <td><%= link_to 'Show', task_path(task) %></td>
+      <td><%= link_to 'Edit', edit_task_path(task) %></td>
+      <td>
+        <%= link_to "Delete", task_path(task), 
+      data: { 
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?" 
+      } %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<h1>Doing</h1>
+<table>
+  <tr>
+    <th>Content</th>
+    <th>State</th>
+  </tr>
+  <% @doing.each do |task| %>
+    <tr>
+      <td><%= link_to task.content, task %></td>
+      <td><%= link_to task.state, task %></td>
+      <td><%= link_to 'Show', task_path(task) %></td>
+      <td><%= link_to 'Edit', edit_task_path(task) %></td>
+      <td>
+        <%= link_to "Delete", task_path(task), 
+      data: { 
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?" 
+      } %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<h1>Done</h1>
+<table>
+  <tr>
+    <th>Content</th>
+    <th>State</th>
+  </tr>
+  <% @done.each do |task| %>
+    <tr>
+      <td><%= link_to task.content, task %></td>
+      <td><%= link_to task.state, task %></td>
       <td><%= link_to 'Show', task_path(task) %></td>
       <td><%= link_to 'Edit', edit_task_path(task) %></td>
       <td>

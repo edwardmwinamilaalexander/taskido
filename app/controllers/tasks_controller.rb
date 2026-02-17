@@ -1,20 +1,25 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user!          # Only logged-in users
   before_action :set_task, only: %i[show edit update destroy]
-  def index   # list all tasks
-    @tasks = Task.all
+
+
+  def index
+    @to_do = current_user.tasks.where(state: "to_do")
+    @doing = current_user.tasks.where(state: "doing")
+    @done = current_user.tasks.where(state: "done")
   end
 
-  def show    # show one task
+  def show
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.build
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to @task, notice: "Task was created successfully!"
+      redirect_to tasks_path, notice: "Task created successfully."
     else
       render :new
     end
@@ -23,26 +28,27 @@ class TasksController < ApplicationController
   def edit
   end
 
-  def update  # handle submission of edits
-    @task = Task.find(params[:id])
+  def update
     if @task.update(task_params)
-      redirect_to @task, notice: "Task was updated successfully!"
+      redirect_to tasks_path, notice: "Task updated successfully."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
-  def destroy # delete a task
+  def destroy
     @task.destroy
-    redirect_to tasks_path, notice: "Task was deleted successfully!"
+    redirect_to tasks_path, notice: "Task deleted successfully."
   end
 
   private
+
   def set_task
-    @task = Task.find(params[:id])
+    # Ensure user can only access their own tasks
+    @task = current_user.tasks.find(params[:id])
   end
 
   def task_params
-    params.require(:task).permit(:content)
+    params.require(:task).permit(:content, :state)
   end
 end
