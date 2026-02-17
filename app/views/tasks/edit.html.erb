@@ -1,6 +1,4 @@
-
 <h2>Edit Task</h2>
-
 <% if @task.errors.any? %>
   <ul>
     <% @task.errors.full_messages.each do |msg| %>
@@ -8,10 +6,8 @@
     <% end %>
   </ul>
 <% end %>
-
 <%= simple_form_for @task do |f| %>
   <%= f.input :content %>
-  
-    <%= f.button :submit, "Update Task", class: "btn btn-primary" %>
-
+  <%= f.button :submit, "Update Task", class: "btn btn-primary" %>
 <% end %>
+<p><%= link_to 'All tasks', tasks_path %></p>

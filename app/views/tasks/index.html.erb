@@ -1,9 +1,15 @@
-<h1>All tasks</h1>
-
-<ul>
+<h1>All Tasks</h1>
+<p><%= link_to 'New Task', new_task_path %></p>
+<table>
+  <tr>
+    <th>Content</th>
+    <th>Actions</th>
+  </tr>
   <% @tasks.each do |task| %>
-    <li><%= link_to task.content, task %></li>
+    <tr>
+      <td><%= link_to task.content, task %></td>
+      <td><%= link_to 'Show', task_path(task) %></td>
+      <td><%= link_to 'Edit', edit_task_path(task) %></td>
+    </tr>
   <% end %>
-</ul>
-
-<%= link_to 'New Task', new_task_path %>
+</table>
