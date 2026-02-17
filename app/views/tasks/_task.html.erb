@@ -1,0 +1,23 @@
+<tr>
+  <td><%= link_to task.content, task %></td>
+  <td><%= link_to task.state, task %></td>
+  <td><%= link_to 'Show', task_path(task) %></td>
+  <td><%= link_to 'Edit', edit_task_path(task) %></td>
+  <td>
+    <%= link_to "Delete", task_path(task), 
+        data: { 
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?" 
+        } %>
+  </td>
+
+  <% if task.state == "doing" %>
+    <td><%= link_to "Mark as To Do", change_state_task_path(task, state: "to_do"), 
+          data: { turbo_method: :put } %></td>
+    <td><%= link_to "Mark as Done", change_state_task_path(task, state: "done"), 
+          data: { turbo_method: :put } %></td>
+  <% else %>
+    <td><%= link_to "Mark as Doing", change_state_task_path(task, state: "doing"), 
+          data: { turbo_method: :put } %></td>
+  <% end %>
+</tr>

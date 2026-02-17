@@ -1,7 +1,6 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user!          # Only logged-in users
-  before_action :set_task, only: %i[show edit update destroy]
-
+  before_action :authenticate_user! # Only logged-in users
+  before_action :set_task, only: %i[show edit update destroy change_state]
 
   def index
     @to_do = current_user.tasks.where(state: "to_do")
@@ -21,7 +20,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to tasks_path, notice: "Task created successfully."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -32,7 +31,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notice: "Task updated successfully."
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -41,10 +40,20 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: "Task deleted successfully."
   end
 
+  def change_state
+    new_state = params[:state]
+
+    if %w[to_do doing done].include?(new_state)
+      @task.update(state: new_state)
+      redirect_to tasks_path, notice: "Task moved to #{new_state.tr('_', ' ')}."
+    else
+      redirect_to tasks_path, alert: "Invalid state."
+    end
+  end
+
   private
 
   def set_task
-    # Ensure user can only access their own tasks
     @task = current_user.tasks.find(params[:id])
   end
 
