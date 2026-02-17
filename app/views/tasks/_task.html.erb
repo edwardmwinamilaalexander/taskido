@@ -1,23 +1,38 @@
-<tr>
-  <td><%= link_to task.content, task %></td>
-  <td><%= link_to task.state, task %></td>
-  <td><%= link_to 'Show', task_path(task) %></td>
-  <td><%= link_to 'Edit', edit_task_path(task) %></td>
-  <td>
-    <%= link_to "Delete", task_path(task), 
-        data: { 
-          turbo_method: :delete,
-          turbo_confirm: "Are you sure?" 
-        } %>
-  </td>
-
-  <% if task.state == "doing" %>
-    <td><%= link_to "Mark as To Do", change_state_task_path(task, state: "to_do"), 
-          data: { turbo_method: :put } %></td>
-    <td><%= link_to "Mark as Done", change_state_task_path(task, state: "done"), 
-          data: { turbo_method: :put } %></td>
-  <% else %>
-    <td><%= link_to "Mark as Doing", change_state_task_path(task, state: "doing"), 
-          data: { turbo_method: :put } %></td>
-  <% end %>
-</tr>
+<div class="task-item mb-3">
+  <div class="d-flex justify-content-between align-items-start">
+    <div class="fw-bold"><%= task.content %></div>
+    <div class="btn-group btn-group-sm">
+      <%= link_to edit_task_path(task), class: "btn btn-outline-secondary", title: "Edit task" do %>
+        <i class="fa-solid fa-pen"></i>
+      <% end %>
+      <%= link_to task_path(task), 
+          data: { 
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure you want to delete this task?" 
+          },
+          class: "btn btn-outline-danger",
+          title: "Delete task" do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </div>
+  </div>
+  <div class="text-muted small">
+    Created <%= time_ago_in_words(task.created_at) %> ago
+  </div>
+  
+  <!-- State change buttons (your existing code) -->
+  <div class="mt-2">
+    <% if task.state == "doing" %>
+      <%= link_to "To Do", change_state_task_path(task, state: "to_do"), 
+          data: { turbo_method: :put },
+          class: "btn btn-sm btn-outline-secondary me-1" %>
+      <%= link_to "Done", change_state_task_path(task, state: "done"), 
+          data: { turbo_method: :put },
+          class: "btn btn-sm btn-outline-success" %>
+    <% else %>
+      <%= link_to "Doing", change_state_task_path(task, state: "doing"), 
+          data: { turbo_method: :put },
+          class: "btn btn-sm btn-outline-warning" %>
+    <% end %>
+  </div>
+</div>

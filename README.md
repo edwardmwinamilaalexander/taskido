@@ -1,24 +1,33 @@
-# README
+# Taskido - A Simple Task Management App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Taskido is a task management application built with Ruby on Rails 8. It allows users to create, manage, and organize tasks in three states: To Do, Doing, and Done.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- User authentication with Devise
+- Create, edit, and delete tasks
+- Organize tasks by state (To Do, Doing, Done)
+- Move tasks between states with one click
+- Responsive design with Bootstrap 5
+- Font Awesome icons for better UX
+- Turbo-powered updates for smooth interactions
 
-* System dependencies
+## Screenshots
+![alt text](image.png)
+![alt text](image-1.png)
 
-* Configuration
+## Tech Stack
 
-* Database creation
+- **Ruby** 3.x
+- **Rails** 8.x
+- **Database**: SQLite (development), PostgreSQL (production)
+- **Authentication**: Devise
+- **Frontend**: Bootstrap 5, Font Awesome
+- **JavaScript**: Turbo
 
-* Database initialization
+## Prerequisites
 
-* How to run the test suite
+- Ruby 3.0 or higher
+- Rails 8.0 or higher
+- SQLite3 (for development)
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

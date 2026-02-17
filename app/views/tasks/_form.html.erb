@@ -1,20 +1,27 @@
-<% if @task.errors.any? %>
-  <div class="alert alert-danger">
-    <h4><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h4>
-    <ul>
-      <% @task.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  </div>
+<% if task.errors.any? %>
+  <h4><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h4>
+  <ul>
+    <% task.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
 <% end %>
-<%= simple_form_for @task do |f| %>
-  <%= f.input :content %>
-  <%= f.input :state, 
+
+<%= simple_form_for @task, html: { class: 'form-signin' } do |f| %>
+  <%= f.input :content, label: false, placeholder: 'Content', autofocus: true %>
+  <!-- <%= f.input :state, label: false, placeholder: 'State',
               collection: ["to_do", "doing", "done"], 
-              prompt: "Select State",
-              include_blank: false %>
-  <%# Dynamic button text based on whether it's a new or existing record %>
-  <%= f.button :submit, @task.new_record? ? "Create Task" : "Update Task", class: "btn btn-primary" %>
+              prompt: "Select State" %> -->
+  
+  <% if @task.new_record? %>
+    <%= f.button :submit, class: 'btn btn-primary w-100' do %>
+      <i class="fa-solid fa-plus"></i> Create Task
+    <% end %>
+  <% else %>
+    <%= f.button :submit, class: 'btn btn-primary w-100' do %>
+      <i class="fa-solid fa-pen"></i> Update Task
+    <% end %>
+  <% end %>
 <% end %>
-<p><%= link_to 'Go back to all tasks', tasks_path %></p>
+
+<%= link_to 'Go back to all tasks', tasks_path %>
